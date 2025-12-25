@@ -8,7 +8,7 @@ const ARCHIVOS_CACHE = [
 ]
 self.addEventListener("install", event => {
     event.waitUntil(caches.open(CACHE_NAME).then(cache => {
-            cache.addAll(FILES))
+            cache.addAll(FILES)})
             )
         self.skipWaiting()
     })
@@ -17,6 +17,7 @@ self.addEventListener("activate", event => {
 })
 self.addEventListener("fetch", event => {
     event.respondWith(caches.match(event.request).then(response => {
-         response || fetch(event.request))
+         response || fetch(event.request)})
     )
 })
+
