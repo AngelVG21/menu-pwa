@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Peruanos</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="apple-touch-icon" href="./Icons/icon-192.png">
+    <meta name="theme-color" content="#d32f2f">
+</head>
+<body>
+    <div id="printHeader">
+        <span id="printTitulo"></span>
+    </div>
+    <header class="header-fijo">
+        <h1>🍴 Sabores del Perú</h1>
+        <button id="modoOscuro">🌙 Modo oscuro</button>
+        <input type="text" id="buscador" placeholder="Buscar plato...">
+        <button class="btn" onclick="ordenarPlatos()">🔤 Ordenar A–Z / Z–A</button>
+        <div class="categorias">
+            <button class="btn-categoria active" data-categoria="todos">Todos</button>
+            <button class="btn-categoria" data-categoria="guisos">Guisos</button>
+            <button class="btn-categoria" data-categoria="fritos">Fritos</button>
+            <button class="btn-categoria" data-categoria="pastas">Pastas</button>
+            <button class="btn-categoria" data-categoria="menestras">Menestras</button>
+            <button class="btn-categoria" data-categoria="entradas">Entradas</button>
+            <button class="btn-categoria" data-categoria="tradicionales">Tradicionales</button>
+            <button class="btn-categoria" data-categoria="postres">Postres</button>
+        </div>
+    </header>
+    <section id="horario">
+        <h2>📅 Menú semanal</h2>
+        <div class="selector-mes">
+            <label for="mes">Mes:</label>
+            <select id="mes">
+                <option value="0">Enero</option>
+                <option value="1">Febrero</option>
+                <option value="2">Marzo</option>
+                <option value="3">Abril</option>
+                <option value="4">Mayo</option>
+                <option value="5">Junio</option>
+                <option value="6">Julio</option>
+                <option value="7">Agosto</option>
+                <option value="8">Septiembre</option>
+                <option value="9">Octubre</option>
+                <option value="10">Noviembre</option>
+                <option value="11">Diciembre</option>
+            </select>
+            <label for="anio">Año:</label>
+            <input type="number" id="anio" min="2024" max="2100">
+            <select id="selectSemana">
+                <option value="todas">Todas las semanas</option>
+                <option value="1">Semana 1</option>
+                <option value="2">Semana 2</option>
+                <option value="3">Semana 3</option>
+                <option value="4">Semana 4</option>
+                <option value="5">Semana 5</option>
+            </select>
+            <section class="semana" data-semana="1"></section>
+            <section class="semana" data-semana="2"></section>
+            <section class="semana" data-semana="3"></section>
+            <section class="semana" data-semana="4"></section>
+            <section class="semana" data-semana="5"></section>
+            <div class="acciones">
+                <button id="randomizarMenu" class="btn btn-random">🔄 Randomizar semana</button>
+                <button id="nuevoMes" class="btn btn-mes">🔄 Nuevo menú del mes</button>
+                <button id="imprimirMenu" class="btn btn-print" onclick="imprimirMenu()">🖨️ Imprimir / Exportar PDF</button>
+            </div>
+        </div>
+        <section id="portada-pdf">
+            <h1>Menu mensual</h1>
+            <h2 id="tituloMesPdf"></h2>
+            <p id="fechaGeneracion"></p>
+        </section>
+        <ul id="listaHorario"></ul>
+    </section>
+    <div id="listaPlatos">
+        <section id="platos">
+        <h2>Platos Peruanos</h2>
+        <div class="menu-item plato" data-categoria="tradicionales"><h3>Lomo Saltado</h3><button class="btn-ingredientes" data-ingredientes="Carne de res, cebolla roja, tomate, papas fritas, sillao, vinagre, ajo, pimienta, comino, arroz">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="entradas"><h3>Ceviche</h3><button class="btn-ingredientes" data-ingredientes="Pescado fresco (corvina o similar), limón, cebolla roja, ají limo, cilantro, sal, pimienta, ajo, camote, choclo">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="tradicionales"><h3>Arroz con Pollo</h3><button class="btn-ingredientes" data-ingredientes="Arroz, pollo, cilantro, espinaca, cebolla, ajo, zanahoria, alverjas, choclo, ají amarillo, aceite, sal">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="fritos"><h3>Tortilla de Coliflor</h3><button class="btn-ingredientes" data-ingredientes="Coliflor, huevos, cebolla, ajo, queso rallado, sal, pimienta, aceite">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="menestras"><h3>Lentejas con Pescado Frito</h3><button class="btn-ingredientes" data-ingredientes="Lentejas, pescado, cebolla, ajo, zanahoria, comino, sal, arroz, aceite">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="pastas"><h3>Tallarines Rojos</h3><button class="btn-ingredientes" data-ingredientes="Fideos, carne de res o pollo, tomate, cebolla, ajo, laurel, albahaca, aceite, sal">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="guisos"><h3>Pollo al Sillao</h3><button class="btn-ingredientes" data-ingredientes="Pollo, sillao, ajo, jengibre, cebolla china, aceite, pimienta">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="fritos"><h3>Salchipapa</h3><button class="btn-ingredientes" data-ingredientes="Salchichas, papas, aceite, mayonesa, ketchup, mostaza">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="pastas"><h3>Tallarines Verdes con Milanesa</h3><button class="btn-ingredientes" data-ingredientes="Fideos, albahaca, espinaca, queso fresco, leche, ajo, milanesa de pollo o res, pan rallado, huevo">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="guisos"><h3>Caihua Rellena</h3><button class="btn-ingredientes" data-ingredientes="Caihua, carne molida, cebolla, ajo, huevo, pan, pasas, maní, sal, pimienta">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="tradicionales"><h3>Ají de Pollo</h3><button class="btn-ingredientes" data-ingredientes="Pollo, ají amarillo, pan, leche, queso, cebolla, ajo, nuez, sal">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="entradas"><h3>Papa a la Huancaína</h3><button class="btn-ingredientes" data-ingredientes="Papa, ají amarillo, queso fresco, leche, galletas, ajo, sal, huevo, aceituna">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="entradas"><h3>Causa Limeña</h3><button class="btn-ingredientes" data-ingredientes="Papa amarilla, limón, ají amarillo, aceite, sal, pollo o atún, mayonesa, palta">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="tradicionales"><h3>Arroz Chaufa</h3><button class="btn-ingredientes" data-ingredientes="Arroz, pollo o chancho, huevo, cebolla china, sillao, aceite, ajo">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="guisos"><h3>Guiso de Quinua</h3><button class="btn-ingredientes" data-ingredientes="Quinua, carne de res o pollo, cebolla, ajo, zanahoria, papa, ají panca, comino, sal, aceite">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="guisos"><h3>Guiso de Trigo</h3><button class="btn-ingredientes" data-ingredientes="Trigo cocido, carne de res, cebolla, ajo, ají panca, papa, zanahoria, sal, comino">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="tradicionales"><h3>Puré con Asado de Res</h3><button class="btn-ingredientes" data-ingredientes="Papa, mantequilla, leche, sal, carne de res, ajo, cebolla, pimienta, aceite">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="tradicionales"><h3>Estofado de Pollo</h3><button class="btn-ingredientes" data-ingredientes="Pollo, cebolla, ajo, tomate, zanahoria, papa, laurel, sal, pimienta">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="guisos"><h3>Olluco</h3><button class="btn-ingredientes" data-ingredientes="Olluco, carne de res, cebolla, ajo, ají amarillo, perejil, sal, aceite">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="guisos"><h3>Cau Cau</h3><button class="btn-ingredientes" data-ingredientes="Mondongo, papa, hierbabuena, ají amarillo, cebolla, ajo, palillo, sal">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="tradicionales"><h3>Arroz Tapado</h3><button class="btn-ingredientes" data-ingredientes="Arroz, carne molida, cebolla, ajo, huevo, pasas, aceitunas, comino, sal">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="fritos"><h3>Chicharrón con Camote Frito</h3><button class="btn-ingredientes" data-ingredientes="Carne de cerdo, ajo, comino, sal, camote, aceite, cebolla, limón">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="tradicionales"><h3>Adobo de Chancho</h3><button class="btn-ingredientes" data-ingredientes="Carne de cerdo, chicha de jora, ají panca, ajo, cebolla, comino, laurel, sal">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="tradicionales"><h3>Pollo a la Olla</h3><button class="btn-ingredientes" data-ingredientes="Pollo, papa, zanahoria, cebolla, ajo, fideos, sal, hierbas">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="menestras"><h3>Alverjas con Hamburguesa</h3><button class="btn-ingredientes" data-ingredientes="Alverjas, hamburguesa de carne, cebolla, ajo, tomate, sal, aceite">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="menestras"><h3>Pallares con Lomo Saltado de Pollo</h3><button class="btn-ingredientes" data-ingredientes="Pallares, pollo, cebolla, tomate, sillao, ajo, comino, aceite">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="entradas"><h3>Huevo a la Rusa</h3><button class="btn-ingredientes" data-ingredientes="Huevo, remolacha, papa, zanahoria, arvejas, mayonesa, sal">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="entradas"><h3>Ocopa</h3><button class="btn-ingredientes" data-ingredientes="Ají mirasol, huacatay, maní, galletas, queso fresco, leche, papa, huevo">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="pastas"><h3>Tallarín Saltado</h3><button class="btn-ingredientes" data-ingredientes="Fideos, carne de res o pollo, cebolla, tomate, sillao, ajo, aceite">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="tradicionales"><h3>Escabeche de Pescado</h3><button class="btn-ingredientes" data-ingredientes="Pescado, cebolla, ají amarillo, vinagre, ajo, harina, aceite, sal">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="guisos"><h3>Locro de Zapallo</h3><button class="btn-ingredientes" data-ingredientes="Zapallo, papa, choclo, queso fresco, leche, cebolla, ajo, sal">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="tradicionales"><h3>Salpicón de Pollo</h3><button class="btn-ingredientes" data-ingredientes="Pollo, cebolla, limón, ají, aceite, sal, pimienta">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="entradas"><h3>Papa Rellena</h3><button class="btn-ingredientes" data-ingredientes="Papa, carne molida, cebolla, ajo, huevo, pasas, aceitunas, comino">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="fritos"><h3>Pollo al Horno</h3><button class="btn-ingredientes" data-ingredientes="Pollo, ajo, comino, pimienta, sal, aceite, hierbas">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="fritos"><h3>Chicharrón de Pota</h3><button class="btn-ingredientes" data-ingredientes="Pota, harina, ajo, sal, limón, aceite">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="entradas"><h3>Menestrón</h3><button class="btn-ingredientes" data-ingredientes="Carne de res, fideos, frejoles, zapallo, papa, zanahoria, albahaca">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="menestras"><h3>Garbanzo con Pescado Frito</h3><button class="btn-ingredientes" data-ingredientes="Garbanzos, pescado, cebolla, ajo, comino, arroz, aceite, sal">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="tradicionales"><h3>Arroz a la Cubana</h3><button class="btn-ingredientes" data-ingredientes="Arroz, huevo frito, plátano frito, sal, aceite">Ver ingredientes</button></div>
+    </section>
+    <section id="postres">
+        <div class="menu-item plato" data-categoria="postres"><h3>Suspiro Limeño</h3><button class="btn-ingredientes" data-ingredientes="Leche condensada, leche evaporada, yemas de huevo, azúcar, claras de huevo, vino oporto, canela">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="postres"><h3>Arroz con Leche</h3><button class="btn-ingredientes" data-ingredientes="Arroz, leche evaporada, leche condensada, canela, clavo de olor, azúcar">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="postres"><h3>Mazamorra Morada</h3><button class="btn-ingredientes" data-ingredientes="Maíz morado, piña, manzana, canela, clavo de olor, azúcar, harina de chuño">Ver ingredientes</button></div>
+        <div class="menu-item plato" data-categoria="postres"><h3>Picarones</h3><button class="btn-ingredientes" data-ingredientes="Harina, zapallo, levadura, azúcar, aceite, miel de chancaca">Ver ingredientes</button></div>
+    </section>
+    </div>
+    <footer>
+        <p>© 2025 Sabores del Peru</p>
+    </footer>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="cerrar">&times;</span>
+            <h3 id="modal-titulo"></h3>
+            <p id="modal-ingredientes"></p>
+        </div>
+    </div>
+    <button id="volverArriba" title="Volver arriba">⬆️</button>
+    <div class="barra-movil">
+        <button class="btn btn-random" data-label="Randomizar semana" onclick="generarMenuSemanal()">🎲</button>
+        <button class="btn btn-mes" data-label="Nuevo menu del mes" onclick="generarMenuMensual()">📅</button>
+    </div>
+    <script src="./menus.js"></script>
+</body>
+</html>l
