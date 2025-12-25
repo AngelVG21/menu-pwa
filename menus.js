@@ -341,5 +341,7 @@ function imprimirMenu() {
     }, 500)
 }
 if("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("service-worker.js").then(() => console.log("PWA lista")).catch(err => console.error("Error SW", err))
+    window.addEventListener("load, () => {
+        navigator.serviceWorker.register("service-worker.js").then(() => console.log("PWA lista")).catch(err => console.error("Error SW", err))
+    })
 }
