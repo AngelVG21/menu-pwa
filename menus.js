@@ -340,8 +340,3 @@ function imprimirMenu() {
         semanas.forEach(s => s.classList.remove("solo-impirmir"))
     }, 500)
 }
-if("serviceWorker" in navigator) {
-    window.addEventListener("load, () => {
-        navigator.serviceWorker.register("service-worker.js").then(() => console.log("PWA lista")).catch(err => console.error("Error SW", err))
-    })
-}
