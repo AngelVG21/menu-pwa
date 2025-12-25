@@ -315,6 +315,10 @@ body.dark .btn:focus {
         width: 100%;
         text-align: center;
     }
+    #volverArriba {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
     #modoOscuro {
         width: 100%;
         margin-bottom: 10px;
@@ -333,18 +337,21 @@ body.dark .btn:focus {
 /* ===== BOTON VOLVER ARRIBA ===== */
 #volverArriba {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 45px;
-    height: 45px;
+    bottom: 80px;
+    right: 16px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
     background: red;
-    color: white;
+    color: #fff;
     border: none;
     font-size: 22px;
     cursor: pointer;
-    z-index: 9999;
-    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
 }
 #volverArriba:hover {
     transform: scale(1.1);
@@ -718,4 +725,5 @@ body.dark .btn[data-label]::after {
         animation: none !important;
         transition: none !important;
     }
+
 }
